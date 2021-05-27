@@ -17,12 +17,14 @@ type SedArgs struct {
 }
 
 func (s *SedArgs) Cmd(c *cli.Context) error {
-	match := regexp.MustCompile(s.Match)
+	match, err := regexp.Compile(s.Match)
+	if err != nil {
+		return err
+	}
 	replace := []byte(s.Replace)
 
 	input := os.Stdin
 	if s.Input != "" {
-		var err error
 		input, err = os.Open(s.Input)
 		if err != nil {
 			return err

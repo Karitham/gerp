@@ -11,9 +11,7 @@ import (
 	"strings"
 )
 
-var (
-	reHidden = regexp.MustCompile(`\a\.|[\\/]\.`)
-)
+var reHidden = regexp.MustCompile(`\a\.|[\\/]\.`)
 
 func (c *Cmd) Run() error {
 	if c.IgnoreCase ||
@@ -120,6 +118,7 @@ func (c *Cmd) search(name string) {
 		if !ok {
 			continue
 		}
+
 		if !c.NoHeader {
 			if isFirst {
 				isFirst = false
@@ -215,7 +214,6 @@ func (c *Cmd) RunStdin() error {
 			continue
 		}
 		if !c.NoHeader {
-
 			if !c.Invert {
 				fmt.Printf("%-4d:    %s\n", i, s)
 			} else {
